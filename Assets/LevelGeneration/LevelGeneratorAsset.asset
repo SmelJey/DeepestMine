@@ -12,3 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9caa5649954f4ec0b556025103204108, type: 3}
   m_Name: LevelGeneratorAsset
   m_EditorClassIdentifier: 
+  initialWallChance: 0.5
+  myWallCntToWall: 5
+  myFloorCntToFloor: 5
+  myAutomatonRounds: 4
+  myHqPrefab: {fileID: 4997114299347062350, guid: b857b43f0e8dccc4c82ee9832f4c2aca, type: 3}
+  myDwarfPrefab: {fileID: 0}
+  myWallPrefab:
+  - {fileID: 8506925870839009024, guid: 71fdd349a7f601c4bb786f79e59c36db, type: 3}
+  myOrePrefab: []

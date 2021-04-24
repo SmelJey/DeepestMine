@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc0613c29593f840b6fada354d50b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLevelGenerator: {fileID: 11400000, guid: 0ee18dab4c3b9e54d8b3f732647925a1, type: 2}
+  levelGeneratorPreset: {fileID: 11400000, guid: 771662eb31a0af342a8967b905f113e5, type: 2}
 --- !u!4 &975925546
 Transform:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.25849947, g: 0.305721, b: 0.3490566, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -220,7 +220,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
