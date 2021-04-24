@@ -3,22 +3,31 @@
 [CreateAssetMenu(fileName = "LevelGeneratorAsset", menuName = "LevelGeneration/LevelGeneratorPreset", order = 1)]
 public class LevelGeneratorPreset : ScriptableObject {
     [SerializeField] private float initialWallChance = 0.4f;
-    [SerializeField] private int myWallCntToWall = 4;
-    [SerializeField] private int myFloorCntToFloor = 4;
-    [SerializeField] private int myAutomatonRounds = 5;
-    [SerializeField] private GameObject myHqPrefab;
-    [SerializeField] private GameObject myDwarfPrefab;
-    [SerializeField] private GameObject[] myWallPrefab;
-    [SerializeField] private GameObject[] myOrePrefab;
+    [SerializeField] private int wallCntToWall = 4;
+    [SerializeField] private int floorCntToFloor = 4;
+    [SerializeField] private int automatonRounds = 5;
+    
+    [SerializeField] private HqComponent hqPrefab;
+    [SerializeField] private GameObject dwarfPrefab;
+    [SerializeField] private GameObject[] wallPrefab;
+    [SerializeField] private GameObject[] orePrefab;
+    
+    [SerializeField] private int maxExitPerChunk = 4;
+    [SerializeField] private int maxExitWidth = 5;
+    [SerializeField] private int borderSize = 4;
 
     public float InitialWallChance => initialWallChance;
-    public int WallCntToWall => myWallCntToWall;
-    public int FloorCntToFloor => myFloorCntToFloor;
-    public int AutomatonRounds => myAutomatonRounds;
+    public int WallCntToWall => wallCntToWall;
+    public int FloorCntToFloor => floorCntToFloor;
+    public int AutomatonRounds => automatonRounds;
 
     
-    public GameObject HqPrefab => myHqPrefab;
-    public GameObject DwarfPrefab => myDwarfPrefab;
-    public GameObject[] WallPrefab => myWallPrefab;
-    public GameObject[] OrePrefab => myOrePrefab;
+    public HqComponent HqPrefab => hqPrefab;
+    public GameObject DwarfPrefab => dwarfPrefab;
+    public GameObject[] WallPrefab => wallPrefab;
+    public GameObject[] OrePrefab => orePrefab;
+
+    public int MaxExitPerChunk => maxExitPerChunk;
+    public int MaxExitWidth=> maxExitWidth;
+    public int BorderSize => borderSize;
 }

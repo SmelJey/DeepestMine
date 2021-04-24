@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5391480743787341392}
   - component: {fileID: 6709486531604983456}
   - component: {fileID: 7243979539763109092}
+  - component: {fileID: -3844505710548674067}
+  - component: {fileID: -8479658686268028524}
   m_Layer: 0
   m_Name: HQ
   m_TagString: Untagged
@@ -110,3 +112,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &-3844505710548674067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997114299347062350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2903ba616ce496593fdf8c93cceffad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8479658686268028524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4997114299347062350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4303643a1ff6497b8063399be46dbc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myMaxHp: 1000
+  myHp: 1000

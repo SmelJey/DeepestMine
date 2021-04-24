@@ -9,6 +9,14 @@ public class SessionManager : MonoBehaviour {
         var levelHost = new GameObject("Level");
 
         myLevelGenerator = new LevelGenerator(levelGeneratorPreset);
-        myLevelGenerator.InitLevel(levelHost);
+        
+        var hq = myLevelGenerator.InitLevel(levelHost);
+        hq.GetComponent<HpComponent>().OnDeath += (hpComponent, args) => {
+            Lose();
+        };
+    }
+
+    public void Lose() {
+        GameManager.Instance.ToMenu();
     }
 }

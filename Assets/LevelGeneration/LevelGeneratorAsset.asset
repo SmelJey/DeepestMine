@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: LevelGeneratorAsset
   m_EditorClassIdentifier: 
   initialWallChance: 0.5
-  myWallCntToWall: 5
-  myFloorCntToFloor: 5
-  myAutomatonRounds: 4
-  myHqPrefab: {fileID: 4997114299347062350, guid: b857b43f0e8dccc4c82ee9832f4c2aca, type: 3}
-  myDwarfPrefab: {fileID: 0}
-  myWallPrefab:
+  wallCntToWall: 5
+  floorCntToFloor: 5
+  automatonRounds: 5
+  hqPrefab: {fileID: -3844505710548674067, guid: b857b43f0e8dccc4c82ee9832f4c2aca, type: 3}
+  dwarfPrefab: {fileID: 0}
+  wallPrefab:
   - {fileID: 8506925870839009024, guid: 71fdd349a7f601c4bb786f79e59c36db, type: 3}
-  myOrePrefab: []
+  orePrefab: []
+  maxExitPerChunk: 4
+  maxExitWidth: 5
+  borderSize: 4

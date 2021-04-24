@@ -22,28 +22,25 @@ public class LevelGenerator {
     private const int MapChunkLength = 100;
     private const int ChunkPreGeneration = 3;
 
-    private const int MaxExitPerChunk = 4;
-    private const int MaxExitWidth = 5;
-
-    private const int BorderSize = 4;
-    
     private List<TileType[]> levelMap;
 
     private int myLastChunk = 0;
 
-    public void InitLevel(GameObject levelHost) {
+    public HqComponent InitLevel(GameObject levelHost) {
         myRandom = new Random(2);
         levelMap = new List<TileType[]>();
-        GenerateLevel(levelHost, ChunkPreGeneration);
-    }
-
-    public void GenerateLevel(GameObject levelHost, int chunkCount) {
-        for (int i = -BorderSize; i < 0; i++) {
-            for (int j = -BorderSize; j < MapWidth + BorderSize; j++) {
+        for (int i = -myPreset.BorderSize; i < 0; i++) {
+            for (int j = -myPreset.BorderSize; j < MapWidth + myPreset.BorderSize; j++) {
                 Object.Instantiate(myPreset.WallPrefab[0], IdxToWorldPos(i, j), Quaternion.identity, levelHost.transform);
             }
         }
-        
+
+        GenerateLevel(levelHost, ChunkPreGeneration);
+
+        return Object.Instantiate(myPreset.HqPrefab, IdxToWorldPos(StartRadius, MapWidth / 2), Quaternion.identity, levelHost.transform);
+    }
+
+    public void GenerateLevel(GameObject levelHost, int chunkCount) {
         for (int i = 0; i < chunkCount; i++) {
             GenerateChunk(levelHost);
         }
@@ -54,12 +51,12 @@ public class LevelGenerator {
         int endY = (myLastChunk + 1) * MapChunkLength;
         List<TileType[]> bufferMap = new List<TileType[]>();
 
-        int exitCnt = myRandom.NextInt(1, MaxExitPerChunk + 1);
+        int exitCnt = myRandom.NextInt(1, myPreset.MaxExitPerChunk + 1);
         int[] exitsX = new int[exitCnt];
         int[] exitsWidth = new int[exitCnt];
         for (int i = 0; i < exitCnt; i++) {
             exitsX[i] = myRandom.NextInt(0, MapWidth);
-            exitsWidth[i] = myRandom.NextInt(1, MaxExitWidth + 1);
+            exitsWidth[i] = myRandom.NextInt(1, myPreset.MaxExitWidth + 1);
         }
 
         for (int i = curY; i < endY; i++) {
@@ -106,7 +103,7 @@ public class LevelGenerator {
         }
 
         for (int i = curY; i < endY; i++) {
-            for (int j = 0 - BorderSize; j < MapWidth + BorderSize; j++) {
+            for (int j = - myPreset.BorderSize; j < MapWidth + myPreset.BorderSize; j++) {
                 if (j < 0 || j >= MapWidth || levelMap[i][j] == TileType.Wall) {
                     Object.Instantiate(myPreset.WallPrefab[0], IdxToWorldPos(i, j), Quaternion.identity, levelHost.transform);
                 }
