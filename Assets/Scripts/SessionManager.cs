@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -101,6 +102,8 @@ public class SessionManager : MonoBehaviour {
                 playerControl.SelectBuilding(building);
             });
         }
+        
+        AstarPath.active.Scan();
     }
 
 

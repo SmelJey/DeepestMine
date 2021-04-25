@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3108146619142364087}
   - component: {fileID: 3108146619142364080}
   - component: {fileID: 5864584607497380132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CopperOre
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,5 +123,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4303643a1ff6497b8063399be46dbc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxHp: 250
-  myHp: 250
+  myMaxHp: 500
+  myHp: 500

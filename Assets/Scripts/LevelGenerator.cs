@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +9,7 @@ using Random = Unity.Mathematics.Random;
 public class LevelGenerator {
     public LevelGenerator(LevelGeneratorPreset preset) {
         myPreset = preset;
-        Array.Sort(preset.Resources, (left, right) => (int)((left.SpawnChance - right.SpawnChance) * 1000));
+        Array.Sort(preset.Resources, (left, right) => (int)((left.GetSpawnChance(left.MinYSpawn) * (-left.MinYSpawn) - right.GetSpawnChance(right.MinYSpawn) * (-right.MinYSpawn)) * 1000));
         Debug.Log("test");
     }
 
@@ -25,24 +26,35 @@ public class LevelGenerator {
     
     private const int MapWidth = 100;
     private const int MapChunkLength = 100;
-    private const int ChunkPreGeneration = 3;
+    private const int ChunkPreGeneration = 1;
 
     private List<TileType[]> levelMap;
 
     private int myLastChunk = 0;
 
+    private void InstantiateIndestructibleWall(Vector3 position, Transform host) {
+        var obj = Object.Instantiate(myPreset.WallPrefab[0], position, Quaternion.identity, host);
+        Object.Destroy(obj.GetComponent<HpComponent>());
+    }
+    
     public HqComponent InitLevel(GameObject levelHost) {
-        myMapRandom = new Random(2);
-        myOreRandom = new Random(2);
+        myMapRandom = new Random((uint)DateTimeOffset.Now.ToUnixTimeMilliseconds());
+        myOreRandom = new Random((uint)DateTimeOffset.Now.ToUnixTimeMilliseconds());
         
         levelMap = new List<TileType[]>();
         for (int i = -myPreset.BorderSize; i < 0; i++) {
             for (int j = -myPreset.BorderSize; j < MapWidth + myPreset.BorderSize; j++) {
-                Object.Instantiate(myPreset.WallPrefab[0], IdxToWorldPos(i, j), Quaternion.identity, levelHost.transform);
+                InstantiateIndestructibleWall(IdxToWorldPos(i, j), levelHost.transform);
             }
         }
 
         GenerateLevel(levelHost, ChunkPreGeneration);
+        
+        for (int i = myLastChunk * MapChunkLength; i < myLastChunk * MapChunkLength + myPreset.BorderSize; i++) {
+            for (int j = -myPreset.BorderSize; j < MapWidth + myPreset.BorderSize; j++) {
+                InstantiateIndestructibleWall(IdxToWorldPos(i, j), levelHost.transform);
+            }
+        }
 
         return Object.Instantiate(myPreset.HqPrefab, IdxToWorldPos(StartRadius, MapWidth / 2), Quaternion.identity, levelHost.transform);
     }
@@ -112,14 +124,14 @@ public class LevelGenerator {
         for (int i = curY; i < endY; i++) {
             for (int j = - myPreset.BorderSize; j < MapWidth + myPreset.BorderSize; j++) {
                 if (j < 0 || j >= MapWidth) {
-                    Object.Instantiate(myPreset.WallPrefab[0], IdxToWorldPos(i, j), Quaternion.identity, levelHost.transform);
+                    InstantiateIndestructibleWall(IdxToWorldPos(i, j), levelHost.transform);
                     continue;
                 }
 
                 if (levelMap[i][j] == TileType.Wall) {
                     bool isWall = true;
                     foreach (var res in myPreset.Resources) {
-                        if (res.MinYSpawn <= i && myOreRandom.NextFloat() < res.SpawnChance) {
+                        if (res.MinYSpawn <= i && myOreRandom.NextFloat() < res.GetSpawnChance(i)) {
                             res.InstantiateOre(IdxToWorldPos(i, j), levelHost.transform);
                             isWall = false;
                             break;
@@ -127,7 +139,10 @@ public class LevelGenerator {
                     }
 
                     if (isWall) {
-                        Object.Instantiate(myPreset.WallPrefab[0], IdxToWorldPos(i, j), Quaternion.identity, levelHost.transform);
+                        var obj = Object.Instantiate(myPreset.WallPrefab[0], IdxToWorldPos(i, j), Quaternion.identity, levelHost.transform);
+                        obj.GetComponent<HpComponent>().OnDeath += (component, args) => {
+                            SessionManager.Instance.StartCoroutine(UpdateGraph(1));
+                        };
                     }
                 }
             }
@@ -135,6 +150,11 @@ public class LevelGenerator {
         
         levelMap.RemoveAt(levelMap.Count - 1);
         myLastChunk++;
+    }
+
+    public static IEnumerator UpdateGraph(int delay) {
+        yield return null;
+        AstarPath.active.Scan();
     }
 
     private Vector3 IdxToWorldPos(int i, int j) {

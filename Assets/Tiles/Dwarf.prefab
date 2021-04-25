@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 1204014308424136541}
   - component: {fileID: 1204014308424136542}
   - component: {fileID: 1204014308424136543}
-  m_Layer: 0
+  - component: {fileID: 4471266746897759747}
+  - component: {fileID: -4479038775470189405}
+  m_Layer: 8
   m_Name: Dwarf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,3 +117,65 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &4471266746897759747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204014308424136536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2461981a99451bbdf6aede6a1d3d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 704
+  currentTool: {fileID: 11400000, guid: ebf4fef8720e54349827d41e6cebf209, type: 2}
+  upgrades:
+  - Tool: {fileID: 11400000, guid: ebf4fef8720e54349827d41e6cebf209, type: 2}
+    Cost:
+      resource: {fileID: 11400000, guid: afaacb1c536056b41bb44834e5c70846, type: 2}
+      cost: 25
+  - Tool: {fileID: 11400000, guid: 4837d01445c37a24d8ea3fef7e573877, type: 2}
+    Cost:
+      resource: {fileID: 11400000, guid: 44f4cc873ca739d4395a8b3102f19b9a, type: 2}
+      cost: 50
+  - Tool: {fileID: 11400000, guid: a427e390df604aa42b20f78453a9bf52, type: 2}
+    Cost:
+      resource: {fileID: 11400000, guid: 4e3df5bd134e75e4283ba719bb3cde39, type: 2}
+      cost: 100
+  - Tool: {fileID: 11400000, guid: 44716e717b348824392847ee31e54e86, type: 2}
+    Cost:
+      resource: {fileID: 11400000, guid: 297ae45faf7ffa24ebfdbd56a339b233, type: 2}
+      cost: 100
+--- !u!114 &-4479038775470189405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204014308424136536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1

@@ -6,6 +6,9 @@ public class HpComponent : MonoBehaviour, ISelectable {
     [SerializeField] private int myMaxHp;
     [SerializeField] private int myHp;
 
+    private bool isUpdated = true;
+    private bool myIsUpdated;
+
     public int MaxHp => myMaxHp;
     public int Hp => myHp;
     public bool DestroyOnDeath { get; set; } = true;
@@ -14,6 +17,7 @@ public class HpComponent : MonoBehaviour, ISelectable {
         var args = new HitArgs(Math.Min(dmg, myHp));
         myHp -= dmg;
         OnHit?.Invoke(this, args);
+        isUpdated = true;
         
         if (myHp <= 0) {
             OnDeath?.Invoke(this, args);
@@ -43,11 +47,15 @@ public class HpComponent : MonoBehaviour, ISelectable {
     public string Name => gameObject.name;
 
     public string GetInfo() {
+        isUpdated = false;
         return $"HP: {myHp} / {myMaxHp}";
     }
 
-    public void OnRightClick() { }
+    public void OnRightClick(Vector2 mousePosition) { }
+    
     public List<ActionInfo> GetActionList() {
         return new List<ActionInfo>();
     }
+
+    public bool IsUpdated() => isUpdated;
 }

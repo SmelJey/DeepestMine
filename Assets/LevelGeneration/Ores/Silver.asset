@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c650f082d414608bc7d14d76b58ed5a, type: 3}
+  m_Name: Silver
+  m_EditorClassIdentifier: 
+  orePrefab: {fileID: 4695359223352101370, guid: ed49b1589c3b8d2449937f25ba19fa45, type: 3}
+  spawnChances:
+  - MinY: 40
+    Chance: 0.05
+  - MinY: 60
+    Chance: 0.075
+  - MinY: 80
+    Chance: 0.05
+  minVein: 1
+  maxVein: 5
+  resourcePerHp: 2

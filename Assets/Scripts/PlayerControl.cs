@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,12 +9,14 @@ public class PlayerControl : MonoBehaviour {
     [SerializeField] private InfoPanel infoPanel;
 
     public SelectedObject SelectedBuilding { get; set; }
-    public List<ISelectable> selectedObject;
+    public List<ISelectable> selectedComponents;
+    private GameObject selectedGameObject;
 
     private Camera myCamera;
 
     public void SelectBuilding(Building building) {
-        selectedObject.Clear();
+        selectedComponents.Clear();
+        selectedGameObject = null;
         
         if (!ReferenceEquals(SelectedBuilding, null)) {
             Destroy(SelectedBuilding.gameObject);
@@ -30,17 +33,30 @@ public class PlayerControl : MonoBehaviour {
             return;
         }
         
-        selectedObject.Clear();
-        selectedObject.AddRange(obj.GetComponents<ISelectable>());
-        infoPanel.ShowSelectedObjectsInfo(selectedObject);
+        selectedComponents.Clear();
+        selectedComponents.AddRange(obj.GetComponents<ISelectable>());
+        selectedGameObject = obj;
+        infoPanel.ShowSelectedObjectsInfo(selectedComponents);
     }
     
     private void Awake() {
         myCamera = Camera.main;
-        selectedObject = new List<ISelectable>();
+        selectedComponents = new List<ISelectable>();
     }
 
     private void Update() {
+        if (selectedGameObject == null) {
+            selectedComponents.Clear();
+            infoPanel.ShowSelectedObjectsInfo(selectedComponents);
+        }
+        
+        foreach (var selected in selectedComponents) {
+            if (selected.IsUpdated()) {
+                infoPanel.ShowSelectedObjectsInfo(selectedComponents);
+                break;
+            }
+        }
+        
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         transform.Translate(new Vector3(x, y) * cameraMovementSpeed * Time.deltaTime);
@@ -63,11 +79,18 @@ public class PlayerControl : MonoBehaviour {
             return;
         }
 
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        
+        if (Input.GetMouseButtonDown(0)) {
             var hit = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero, 0f);
 
             if (hit.collider != null) {
                 SelectObject(hit.collider.gameObject);
+            }
+        } else if (Input.GetMouseButtonDown(1)) {
+            foreach (var selected in selectedComponents) {
+                selected.OnRightClick(mousePos);
             }
         }
     }

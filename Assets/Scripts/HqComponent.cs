@@ -7,9 +7,14 @@ using UnityEngine;
 public class HqComponent : MonoBehaviour, ISelectable {
     public string Name => gameObject.name;
 
-    public string GetInfo() { return String.Empty; }
+    public string GetInfo() {
+        isUpdated = false;
+        return String.Empty;
+    }
 
-    public void OnRightClick() { }
+    public void OnRightClick(Vector2 mousePosition) { }
+
+    private bool isUpdated = true;
 
     [SerializeField] private List<ResourceEntry> cost;
     [SerializeField] private float increasingCoef;
@@ -33,8 +38,11 @@ public class HqComponent : MonoBehaviour, ISelectable {
             cost.Clear();
             cost = entryList.Select(it => new ResourceEntry(it.ResourceType, (int) (it.Cost * increasingCoef)))
                             .ToList();
+            isUpdated = true;
 
             Instantiate(dwarfPrefab, transform.position + new Vector3(0, -2, 0), Quaternion.identity);
         })};
     }
+
+    public bool IsUpdated() => isUpdated;
 }

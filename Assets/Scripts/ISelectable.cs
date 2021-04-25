@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class ActionInfo {
@@ -17,7 +18,9 @@ public interface ISelectable {
     
     string GetInfo();
     
-    void OnRightClick();
+    void OnRightClick(Vector2 mousePosition);
 
     List<ActionInfo> GetActionList();
+
+    bool IsUpdated();
 }
