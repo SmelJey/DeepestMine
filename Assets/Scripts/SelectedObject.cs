@@ -5,10 +5,13 @@ public class SelectedObject : MonoBehaviour {
     public Building AssociatedBuilding { get; set; }
     private Collider2D myCollider2D;
     private SpriteRenderer mySpriteRenderer;
-
+    private int cachedLayer;
+    
     private void Awake() {
         myCollider2D = GetComponent<Collider2D>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        cachedLayer = gameObject.layer;
+        gameObject.layer = LayerMask.NameToLayer("BuildingPlacement");
     }
 
     public bool CheckAccessibility(Dictionary<Resource, int> resources) {
@@ -36,6 +39,8 @@ public class SelectedObject : MonoBehaviour {
         if (AssociatedBuilding.name == "Factory") {
             SessionManager.Instance.AddFactory(gameObject);
         }
+
+        gameObject.layer = cachedLayer;
         
         Destroy(this);
         return true;

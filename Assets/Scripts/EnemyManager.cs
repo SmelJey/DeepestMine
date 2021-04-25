@@ -36,6 +36,7 @@ public class EnemyManager : MonoBehaviour {
             }
             
             myDifficulty++;
+            SessionManager.Instance.Score = myDifficulty;
             if (myDifficulty % hordeDifficultyCoef == 0) {
                 myDifficultyMultiplier *= 1f + myDifficulty * 1f / 3000;
                 SpawnHorde(myHordeCnt);

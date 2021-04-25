@@ -31,6 +31,11 @@ public class SessionManager : MonoBehaviour {
     public Vector2 HQPosition => playerHq == null ? Vector2.zero : (Vector2)playerHq.transform.position;
     private HqComponent playerHq;
 
+    public int Score {
+        get;
+        set;
+    } = 0;
+    
     public bool CheckFactories() {
         foreach (var factory in myFactories.ToList()) {
             if (factory == null) {
@@ -143,5 +148,6 @@ public class SessionManager : MonoBehaviour {
 
     public void Lose() {
         GameManager.Instance.ToMenu();
+        GameManager.Instance.LastScore = Score;
     }
 }

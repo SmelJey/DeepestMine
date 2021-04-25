@@ -89,8 +89,10 @@ public class Dwarf : MonoBehaviour, ISelectable {
             }
 
             if (closestTarget != null) {
+                var isMelee = myAttackComponent.Weapon.AttackRange < 2;
+                var mask = isMelee ? myAttackComponent.CollisionMask : myAttackComponent.AttackMask;
                 var hit = Physics2D.Raycast(transform.position, closestTarget.transform.position - transform.position, 1000,
-                                            myAttackComponent.CollisionMask);
+                                            mask);
                 if (hit.collider != null && hit.collider.gameObject == closestTarget) {
                     Vector2 moveDirection = closestTarget.transform.position - transform.position; 
                     if (moveDirection != Vector2.zero) 
@@ -101,9 +103,10 @@ public class Dwarf : MonoBehaviour, ISelectable {
             
                     if (hit.distance < myAttackComponent.Weapon.AttackRange) {
                         myAttackComponent.TryAttackTarget(closestTarget);
-                    } else {
+                    } else if (isMelee) {
                         Move(moveDirection.normalized);
                     }
+                    
                     return;
                 }
             } 

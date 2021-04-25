@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AttackComponent : MonoBehaviour {
     private AudioSource myAudioSource;
@@ -9,7 +10,7 @@ public class AttackComponent : MonoBehaviour {
     public DwarfTool Weapon;
 
     public LayerMask CollisionMask;
-    [SerializeField] private LayerMask attackMask;
+    public LayerMask AttackMask;
 
     private void Awake() {
         myAudioSource = GetComponent<AudioSource>();
@@ -24,7 +25,7 @@ public class AttackComponent : MonoBehaviour {
             var obj = hit.collider.gameObject;
             var hitComp = obj.GetComponent<HpComponent>();
             if (hitComp != null) {
-                if (attackMask.value != (attackMask.value | (1 << obj.layer)) || obj.CompareTag("Wall") && !Weapon.CanAttackRocks) {
+                if (AttackMask.value != (AttackMask.value | (1 << obj.layer)) || obj.CompareTag("Wall") && !Weapon.CanAttackRocks) {
                     return;
                 }
 

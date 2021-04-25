@@ -70,6 +70,7 @@ public class PlayerControl : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0)) {
                 if (!EventSystem.current.IsPointerOverGameObject() && SelectedBuilding.Instantiate()) {
+                    AstarPath.active.Scan();
                     SelectedBuilding = null;
                 }
             } else if (Input.GetMouseButtonDown(1)) {

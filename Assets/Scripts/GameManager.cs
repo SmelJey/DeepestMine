@@ -21,4 +21,6 @@ public class GameManager : MonoBehaviour {
     public void ToMenu() {
         SceneManager.LoadScene("MainMenu");
     }
+    
+    public int LastScore { get; set; }
 }
