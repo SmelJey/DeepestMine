@@ -1150,7 +1150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc0613c29593f840b6fada354d50b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 500
+  startingMoney:
+  - resource: {fileID: 11400000, guid: afaacb1c536056b41bb44834e5c70846, type: 2}
+    cost: 400
+  - resource: {fileID: 11400000, guid: 44f4cc873ca739d4395a8b3102f19b9a, type: 2}
+    cost: 50
   levelGeneratorPreset: {fileID: 11400000, guid: 771662eb31a0af342a8967b905f113e5, type: 2}
   buildings:
   - {fileID: 11400000, guid: 074fbe1857118d144b33c5e0e900f0bf, type: 2}
@@ -1291,18 +1295,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60688aa124043a59d31d4e830839b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hordeDifficultyCoef: 90
+  hordeDifficultyCoef: 240
   enemyTypes:
   - EnemyPrefab: {fileID: 1960484555425407730, guid: 8bc0294c998f2f943a273236a35a7012, type: 3}
-    SpawningChance: 0.2
+    SpawningChance: 0.1
     minimalDifficulty: 30
   - EnemyPrefab: {fileID: 3852399766729540659, guid: 6c21d38b7c34f3943aeb85d871e14408, type: 3}
-    SpawningChance: 0.3
-    minimalDifficulty: 60
-  - EnemyPrefab: {fileID: 3763701137728750456, guid: a6415045c6e91004c808066ee6eb962e, type: 3}
     SpawningChance: 0.15
-    minimalDifficulty: 120
-  myHordeCnt: 5
+    minimalDifficulty: 90
+  - EnemyPrefab: {fileID: 3763701137728750456, guid: a6415045c6e91004c808066ee6eb962e, type: 3}
+    SpawningChance: 0.1
+    minimalDifficulty: 180
+  myHordeCnt: 3
 --- !u!4 &979900454
 Transform:
   m_ObjectHideFlags: 0
@@ -1541,7 +1545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000120721}
+  m_AnchoredPosition: {x: 0, y: -0.000021580085}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1255470717

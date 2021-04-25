@@ -166,8 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4303643a1ff6497b8063399be46dbc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMaxHp: 100
-  myHp: 100
+  myMaxHp: 50
+  myHp: 50
 --- !u!114 &3763701137728750457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   CollisionMask:
     serializedVersion: 2
     m_Bits: 448
-  attackMask:
+  AttackMask:
     serializedVersion: 2
     m_Bits: 448
 --- !u!114 &3763701137728750456

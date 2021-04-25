@@ -13,6 +13,11 @@ public class HpComponent : MonoBehaviour, ISelectable {
     public int Hp => myHp;
     public bool DestroyOnDeath { get; set; } = true;
 
+    public void UpgradeHp(int amount) {
+        myHp += amount;
+        myMaxHp += amount;
+    }
+
     public void GetHit(int dmg, GameObject attacker) {
         var args = new HitArgs(Math.Min(dmg, myHp), attacker);
         myHp -= dmg;

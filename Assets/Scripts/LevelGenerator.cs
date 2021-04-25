@@ -9,8 +9,6 @@ using Random = Unity.Mathematics.Random;
 public class LevelGenerator {
     public LevelGenerator(LevelGeneratorPreset preset) {
         myPreset = preset;
-        Array.Sort(preset.Resources, (left, right) => (int)((left.GetSpawnChance(left.MinYSpawn) * (-left.MinYSpawn) - right.GetSpawnChance(right.MinYSpawn) * (-right.MinYSpawn)) * 1000));
-        Debug.Log("test");
     }
 
     private LevelGeneratorPreset myPreset;

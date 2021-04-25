@@ -153,11 +153,23 @@ MonoBehaviour:
   - Tool: {fileID: 11400000, guid: a427e390df604aa42b20f78453a9bf52, type: 2}
     Cost:
       resource: {fileID: 11400000, guid: 4e3df5bd134e75e4283ba719bb3cde39, type: 2}
-      cost: 100
+      cost: 50
   - Tool: {fileID: 11400000, guid: 44716e717b348824392847ee31e54e86, type: 2}
     Cost:
       resource: {fileID: 11400000, guid: 297ae45faf7ffa24ebfdbd56a339b233, type: 2}
       cost: 100
+  tier1Arm: {fileID: -945174091628276166, guid: c01f414cb0cd0b14cbef4069c4f7aed7, type: 3}
+  tier1Inc: 50
+  tier1Upgrade:
+  - resource: {fileID: 11400000, guid: 44f4cc873ca739d4395a8b3102f19b9a, type: 2}
+    cost: 50
+  tier2Arm: {fileID: -5768112773680312909, guid: c01f414cb0cd0b14cbef4069c4f7aed7, type: 3}
+  tier2Inc: 100
+  tier2Upgrade:
+  - resource: {fileID: 11400000, guid: 297ae45faf7ffa24ebfdbd56a339b233, type: 2}
+    cost: 50
+  - resource: {fileID: 11400000, guid: f0da71eb2fb98fc4e9f7d3b5ab843777, type: 2}
+    cost: 50
 --- !u!114 &-4479038775470189405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +214,7 @@ MonoBehaviour:
   CollisionMask:
     serializedVersion: 2
     m_Bits: 704
-  attackMask:
+  AttackMask:
     serializedVersion: 2
     m_Bits: 576
 --- !u!50 &9056864953853984906

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Pathfinding;
 using UnityEngine;
 
@@ -11,6 +12,16 @@ public class Dwarf : MonoBehaviour, ISelectable {
     [SerializeField] private LayerMask autoAttackMask;
 
     [SerializeField] private List<DwarfToolCost> upgrades;
+
+    private int tier = 0;
+    
+    [SerializeField] private Sprite tier1Arm;
+    [SerializeField] private int tier1Inc;
+    [SerializeField] private List<ResourceEntry> tier1Upgrade;
+    
+    [SerializeField] private Sprite tier2Arm;
+    [SerializeField] private int tier2Inc;
+    [SerializeField] private List<ResourceEntry> tier2Upgrade;
 
     [Serializable]
     private class DwarfToolCost {
@@ -26,8 +37,10 @@ public class Dwarf : MonoBehaviour, ISelectable {
     private Seeker mySeeker;
     private bool isUpdated = true;
     private Rigidbody2D myRigidbody2D;
+    private SpriteRenderer mySpriteRenderer;
     
     private HashSet<GameObject> myTargets;
+    private HpComponent myHpComponent;
     
     private void Awake() {
         mySeeker = GetComponent<Seeker>();
@@ -37,6 +50,8 @@ public class Dwarf : MonoBehaviour, ISelectable {
         weaponRenderer.sprite = myAttackComponent.Weapon.ToolSprite;
 
         myTargets = new HashSet<GameObject>();
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        myHpComponent = GetComponent<HpComponent>();
     }
 
     public string Name => gameObject.name;
@@ -153,10 +168,41 @@ public class Dwarf : MonoBehaviour, ISelectable {
                 continue;
             }
             
-            actions.Add(new ActionInfo($"Cost: {upgrade.Cost.ResourceType} :: {upgrade.Cost.Cost}", () => {
+            actions.Add(new ActionInfo($"{upgrade.Tool.name}\n Cost: {upgrade.Cost.ResourceType} :: {upgrade.Cost.Cost}", () => {
                 if (myAttackComponent.Weapon.name != upgrade.Tool.name && SessionManager.Instance.Buy(new List<ResourceEntry> {upgrade.Cost})) {
                     myAttackComponent.Weapon = upgrade.Tool;
                     weaponRenderer.sprite = myAttackComponent.Weapon.ToolSprite;
+                    isUpdated = true;
+                }
+            }));
+        }
+
+        if (tier == 0) {
+            var sb = new StringBuilder();
+            sb.Append($"Armor upgrade {tier + 1}\n Cost: ");
+            foreach (var res in tier1Upgrade) {
+                sb.Append($"{res.ResourceType.name} : {res.Cost} \n");
+            }
+            actions.Add(new ActionInfo(sb.ToString(), () => {
+                if (SessionManager.Instance.Buy(tier1Upgrade)) {
+                    tier++;
+                    mySpriteRenderer.sprite = tier1Arm;
+                    isUpdated = true;
+                    myHpComponent.UpgradeHp(tier1Inc);
+                }
+            }));
+        }
+        if (tier == 1) {
+            var sb = new StringBuilder();
+            sb.Append($"Armor upgrade {tier + 1}\n Cost: ");
+            foreach (var res in tier2Upgrade) {
+                sb.Append($"{res.ResourceType.name} : {res.Cost} \n");
+            }
+            actions.Add(new ActionInfo(sb.ToString(), () => {
+                if (SessionManager.Instance.Buy(tier2Upgrade)) {
+                    tier++;
+                    mySpriteRenderer.sprite = tier2Arm;
+                    myHpComponent.UpgradeHp(tier2Inc);
                     isUpdated = true;
                 }
             }));
