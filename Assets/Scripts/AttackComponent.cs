@@ -1,14 +1,20 @@
 ﻿
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class AttackComponent : MonoBehaviour {
+    private AudioSource myAudioSource;
     public bool IsAttacking { get; private set; }
     public DwarfTool Weapon;
 
     public LayerMask CollisionMask;
     [SerializeField] private LayerMask attackMask;
-    
+
+    private void Awake() {
+        myAudioSource = GetComponent<AudioSource>();
+    }
+
     public void TryAttackTarget(GameObject target) {
         Debug.DrawRay(transform.position, (target.transform.position - transform.position).normalized, Color.red);
         var hit = Physics2D.Raycast(transform.position,
@@ -43,6 +49,10 @@ public class AttackComponent : MonoBehaviour {
         
         IsAttacking = true;
         component.GetHit(Weapon.AttackDamage, gameObject);
+        if (Weapon.SounfFX != null) {
+            myAudioSource.clip = Weapon.SounfFX;
+            myAudioSource.Play();
+        }
 
         yield return new WaitForSeconds(Weapon.AttackCooldown);
         IsAttacking = false;

@@ -84,7 +84,8 @@ public class SessionManager : MonoBehaviour {
             Destroy(Instance);
         }
         Instance = this;
-        
+
+        myFactories = new HashSet<GameObject>();
         var levelHost = new GameObject("Level");
 
         myLevelGenerator = new LevelGenerator(levelGeneratorPreset);

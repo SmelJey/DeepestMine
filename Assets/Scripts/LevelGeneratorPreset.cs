@@ -16,6 +16,7 @@ public class LevelGeneratorPreset : ScriptableObject {
     [SerializeField] private int borderSize = 4;
     
     [SerializeField] private Resource[] resources;
+    [SerializeField] private GameObject[] floorPrefab;
 
     public float InitialWallChance => initialWallChance;
     public int WallCntToWall => wallCntToWall;
@@ -31,4 +32,6 @@ public class LevelGeneratorPreset : ScriptableObject {
     public int MaxExitPerChunk => maxExitPerChunk;
     public int MaxExitWidth=> maxExitWidth;
     public int BorderSize => borderSize;
+
+    public GameObject[] FloorPrefab => floorPrefab;
 }

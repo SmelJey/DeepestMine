@@ -8,6 +8,7 @@ public class DwarfTool : ScriptableObject {
     [SerializeField] private bool canAttackRocks;
     [SerializeField] private Sprite toolSprite;
     [SerializeField] private bool needFactory;
+    [SerializeField] private AudioClip sfx;
 
     public float AttackRange => attackRange;
     public int AttackDamage => attackDamage;
@@ -15,4 +16,5 @@ public class DwarfTool : ScriptableObject {
     public bool CanAttackRocks => canAttackRocks;
     public Sprite ToolSprite => toolSprite;
     public bool NeedFactory => needFactory;
+    public AudioClip SounfFX => sfx;
 }

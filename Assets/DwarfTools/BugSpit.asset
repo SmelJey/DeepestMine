@@ -17,3 +17,5 @@ MonoBehaviour:
   attackCooldown: 1.5
   canAttackRocks: 1
   toolSprite: {fileID: 0}
+  needFactory: 0
+  sfx: {fileID: 8300000, guid: 72280eae503f7454286508023623918d, type: 3}

@@ -25,9 +25,11 @@ MonoBehaviour:
   borderSize: 4
   resources:
   - {fileID: 11400000, guid: b48d61da6e60fc04eb091279b2ada9d3, type: 2}
-  - {fileID: 11400000, guid: 4e3df5bd134e75e4283ba719bb3cde39, type: 2}
   - {fileID: 11400000, guid: 7a268cbffbd02814b972fbc123381f35, type: 2}
+  - {fileID: 11400000, guid: 4e3df5bd134e75e4283ba719bb3cde39, type: 2}
   - {fileID: 11400000, guid: f0da71eb2fb98fc4e9f7d3b5ab843777, type: 2}
   - {fileID: 11400000, guid: 297ae45faf7ffa24ebfdbd56a339b233, type: 2}
   - {fileID: 11400000, guid: 44f4cc873ca739d4395a8b3102f19b9a, type: 2}
   - {fileID: 11400000, guid: afaacb1c536056b41bb44834e5c70846, type: 2}
+  floorPrefab:
+  - {fileID: 7617286885709205525, guid: 39356b308b38b4746a929abb118e13e1, type: 3}

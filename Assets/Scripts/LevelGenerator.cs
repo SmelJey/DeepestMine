@@ -123,6 +123,8 @@ public class LevelGenerator {
 
         for (int i = curY; i < endY; i++) {
             for (int j = - myPreset.BorderSize; j < MapWidth + myPreset.BorderSize; j++) {
+                Object.Instantiate(myPreset.FloorPrefab[0], IdxToWorldPos(i, j), Quaternion.identity, levelHost.transform);
+                
                 if (j < 0 || j >= MapWidth) {
                     InstantiateIndestructibleWall(IdxToWorldPos(i, j), levelHost.transform);
                     continue;

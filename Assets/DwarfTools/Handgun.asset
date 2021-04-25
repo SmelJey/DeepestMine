@@ -17,3 +17,4 @@ MonoBehaviour:
   attackCooldown: 2
   canAttackRocks: 0
   toolSprite: {fileID: 457355630700442829, guid: c01f414cb0cd0b14cbef4069c4f7aed7, type: 3}
+  needFactory: 1
