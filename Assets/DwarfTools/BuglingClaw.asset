@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuglingClaw
   m_EditorClassIdentifier: 
   attackRange: 1
-  attackDamage: 5
+  attackDamage: 4
   attackCooldown: 0.75
   canAttackRocks: 1
   toolSprite: {fileID: 0}

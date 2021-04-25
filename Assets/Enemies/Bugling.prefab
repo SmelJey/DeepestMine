@@ -199,6 +199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 6
+  autoAttackMask:
+    serializedVersion: 2
+    m_Bits: 384
 --- !u!114 &-6771747308552794086
 MonoBehaviour:
   m_ObjectHideFlags: 0

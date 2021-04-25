@@ -9,6 +9,8 @@ public class SessionManager : MonoBehaviour {
         get;
         private set;
     }
+
+    [SerializeField] private int startingMoney = 100;
     
     [SerializeField] private LevelGeneratorPreset levelGeneratorPreset;
     [SerializeField] private Building[] buildings;
@@ -73,7 +75,7 @@ public class SessionManager : MonoBehaviour {
         
         float curX = 20 + resourceLabelPrefab.rect.width / 2;
         foreach (var res in levelGeneratorPreset.Resources) {
-            myResourceCounts.Add(res, 100);
+            myResourceCounts.Add(res, startingMoney);
             var resourceLabel = Instantiate(resourceLabelPrefab, upperPanel);
             myResourceLabels.Add(res, resourceLabel.GetComponent<Text>());
             resourceLabel.anchoredPosition = new Vector2(curX, 0);

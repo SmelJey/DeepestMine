@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
     [SerializeField] private int movementSpeed = 15;
+    [SerializeField] private LayerMask autoAttackMask;
 
     private AttackComponent myAttackComponent;
     private Seeker mySeeker;
@@ -129,7 +130,9 @@ public class Enemy : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        myTargets.Add(other.gameObject);
+        if (autoAttackMask.value == (autoAttackMask.value | (1 << other.gameObject.layer))) {
+            myTargets.Add(other.gameObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {

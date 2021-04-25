@@ -1150,6 +1150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc0613c29593f840b6fada354d50b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingMoney: 500
   levelGeneratorPreset: {fileID: 11400000, guid: 771662eb31a0af342a8967b905f113e5, type: 2}
   buildings:
   - {fileID: 11400000, guid: 074fbe1857118d144b33c5e0e900f0bf, type: 2}
@@ -1187,7 +1188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAABQIewC++TPVAIAAPoEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMFy2jAQ/RVG59KxEwyT3lqHkB5IMqGdXHxZrDXWIEseSQ6QDP/elWxjl5wQb9+u3r5d+ZMJZWvMnTYrI/hac2Q/Jsyf2bfJEHzEI+y02ogP7DlvgrvSkyBwXsEJTXjs06yu0BmR/1Q76ckRgY0ShTbVku8w1dZZgguQFilktPPZiqDPCTvSz/TOp5zodLPwpw863UWTMx1zVA7NQO2J06QntrxG5RKqGrkXPdDjKO4S6BSIihrqOD6UaymF7dQwd6pDtynUtqFeiMAFUHdBQvQ9IaBEsSud1zpOfy4Ki64TaOB0LwzZ1NZlv3TrXQV232p7B9kECXc3QVVbdP0lPp+FcGF09djfG0f+DleKfP8KpxysG5k7hu8H6XGw6AByD1uJbyWqJ70yulF8lNtYvLmn/840OO4tLTHfD3irtQcvyfXXIfUjmpL159D/MZWi2gYvZy2wkTp4HlYADU3nN0kOC2K7EoR6GX8t/oHdeJO6wIMw1lGo61N5fVvdGE9ly+Cab6dxqTYKA9y1UqMC6U4vVMZdD/EqNrr2KvIA/s10l3ex/ilcpQR44EfRVehFHy7jsqU+rNGWz42TQuEg2geeyKdUK9Xu2NiTPm3TmALyUdquEfz/5WLFYj6LC4ToNs6TLcTT7RziWz5bJNECkyJJWNg+oahPkC+t0M4empoaiivatP5TMlkZqMO+cwOHlfio9MhyoQq9yQ2iem4rXISjoUvoZfIlF2TQBp0TKsybfWZM6nyPPLsUykKny6MzkA1VMlaLd+08krE0fDsydmbnf1BLAwQUAAAICAAAUCHs7y3vPm0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0Upq5mYlhWmqigbFhsmlSoqFuklmioXGKibmpgXmqaZqpqVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAUCHsAvvkz1QCAAD6BAAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAUCHs7y3vPm0AAAB4AAAACQAkAAAAAAAAAAAAAAChAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAFkDAAAAAA==
+    dataString: UEsDBBQAAAgIAABQIeyIm0saVQIAAPwEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMFy4jAM/RXG52UnaQlM97abUroH2k7ZnV5yEbFCPDh2xnYKtMO/r+wkJEtPCOlJenqS88mEsjXmTpuVEXytObIfE+Zt9m0yBB/xCDutNuIDe8yb4K70IAiYV3BCkz/2aVZX6IzIf6qd9OCInI0ShTbVku8w1dZZchcgLVLIaOezFbk+J+xIP9M7n3Ii62bhrQ+y7qLJmcwclUMzQHvgNOmBLa5RuYSqRu5JD/A4irsEsgJQ0UAdJvqe+A5aSmE7Psyd6jBvCrVtaBoCcAE0XyDRZpQodqXzbMfpz0Vh0XUUDZzuhSGh2rrsl27Vq8DuW3bvIBvfKb67Cbzaousv8fkshAujq8e+bxz5Hq4U+f4VTjlYN5J37L4fqMdBpAPIPWwlvpWonvTK6EbxUW5j8eae/jvT4Hi2tMR8P/hbrr3zklx/XVO/pCmJfw7zH1Mpqm3QctY6NlIHzcMRoKH9/CbK4URsV4K8nsZfi39gN76lLvAgjHUU6uZUnt9WN8ZD2TKo5sdpXKqNwuDuRqlRgXSnFyrjrpd4FRu1vYo8gH81XfMu1j+Gq5TgHvBRdBV60YfLumypD2u05XPjpFA4kPaBJ9Ip1Uq1NzbWpE/bNKaAfJS2awT//7hYsZjP4gIhuo3zZAvxdDuH+JbPFkm0wKRIEhauTyiaE+RLS7STh7amhuKKLq3/mExWBupw79zAYSU+Kj2SXKhCb3KDqJ7bChfiaKgJvU2+5IIE2qBzQoV9s8+MSZ3vkWeXQlmYdHl0BrKhSsZq8a6d92QsDV+PjJ3Z+R9QSwMEFAAACAgAAFAh7O8t7z5tAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tFKauZmJYVpqooGxYbJpUqKhbpJZoqFxiom5qYF5qmmaqalSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAFAh7IibSxpVAgAA/AQAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAFAh7O8t7z5tAAAAeAAAAAkAJAAAAAAAAAAAAAAAogIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABaAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -1270,7 +1271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979900452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 263.93738, y: 696.51166, z: -91.79329}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1500,7 +1501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000058174133}
+  m_AnchoredPosition: {x: 0, y: -0.000036684585}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1255470717
@@ -1581,7 +1582,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255470717}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

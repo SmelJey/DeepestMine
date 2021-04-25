@@ -8,6 +8,7 @@ public class Dwarf : MonoBehaviour, ISelectable {
     [SerializeField] private int movementSpeed = 7;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private SpriteRenderer weaponRenderer;
+    [SerializeField] private LayerMask autoAttackMask;
 
     [SerializeField] private List<DwarfToolCost> upgrades;
 
@@ -26,12 +27,16 @@ public class Dwarf : MonoBehaviour, ISelectable {
     private bool isUpdated = true;
     private Rigidbody2D myRigidbody2D;
     
+    private HashSet<GameObject> myTargets;
+    
     private void Awake() {
         mySeeker = GetComponent<Seeker>();
         myAttackComponent = GetComponent<AttackComponent>();
         myRigidbody2D = GetComponent<Rigidbody2D>();
         
         weaponRenderer.sprite = myAttackComponent.Weapon.ToolSprite;
+
+        myTargets = new HashSet<GameObject>();
     }
 
     public string Name => gameObject.name;
@@ -67,6 +72,42 @@ public class Dwarf : MonoBehaviour, ISelectable {
         }
         
         if (myPath == null || myAttackComponent.IsAttacking) {
+            float closestDist = 1000f;
+            GameObject closestTarget = null;
+            
+            foreach (var enemy in myTargets.ToList()) {
+                if (enemy == null) {
+                    myTargets.Remove(enemy);
+                    continue;
+                }
+
+                var dist = Vector2.Distance(transform.position, enemy.transform.position);
+                if (dist < closestDist) {
+                    closestDist = dist;
+                    closestTarget = enemy;
+                }
+            }
+
+            if (closestTarget != null) {
+                var hit = Physics2D.Raycast(transform.position, closestTarget.transform.position - transform.position, 1000,
+                                            myAttackComponent.CollisionMask);
+                if (hit.collider != null && hit.collider.gameObject == closestTarget) {
+                    Vector2 moveDirection = closestTarget.transform.position - transform.position; 
+                    if (moveDirection != Vector2.zero) 
+                    {
+                        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+                        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    }
+            
+                    if (hit.distance < myAttackComponent.Weapon.AttackRange) {
+                        myAttackComponent.TryAttackTarget(closestTarget);
+                    } else {
+                        Move(moveDirection.normalized);
+                    }
+                    return;
+                }
+            } 
+            
             myRigidbody2D.velocity = Vector2.zero;
             return;
         }
@@ -115,6 +156,18 @@ public class Dwarf : MonoBehaviour, ISelectable {
         }
 
         return actions;
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (autoAttackMask.value == (autoAttackMask.value | (1 << other.gameObject.layer))) {
+            myTargets.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if (myTargets.Contains(other.gameObject)) {
+            myTargets.Remove(other.gameObject);
+        }
     }
 
     public bool IsUpdated() => isUpdated;

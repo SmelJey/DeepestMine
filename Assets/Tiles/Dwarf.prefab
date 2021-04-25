@@ -137,6 +137,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 704
   weaponRenderer: {fileID: 6415725899926033717}
+  autoAttackMask:
+    serializedVersion: 2
+    m_Bits: 512
   upgrades:
   - Tool: {fileID: 11400000, guid: ebf4fef8720e54349827d41e6cebf209, type: 2}
     Cost:
@@ -232,7 +235,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6189732486375002489}
   - component: {fileID: 6415725899926033717}
-  m_Layer: 8
+  - component: {fileID: 3629542435217075655}
+  m_Layer: 11
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,3 +309,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &3629542435217075655
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7920598539442865513}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10
