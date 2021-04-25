@@ -21,7 +21,9 @@ public class Resource : ScriptableObject {
         var obj = Instantiate(orePrefab, position, Quaternion.identity, host);
         var hp = obj.GetComponent<HpComponent>();
         hp.OnHit += (hpComponent, args) => {
-            SessionManager.Instance.AddResource(new List<ResourceEntry> {new ResourceEntry(this, args.Damage * resourcePerHp)});
+            if (args.Attacker.CompareTag("Player")) {
+                SessionManager.Instance.AddResource(new List<ResourceEntry> {new ResourceEntry(this, args.Damage * resourcePerHp)});
+            }
         };
         hp.OnDeath += (component, args) => SessionManager.Instance.StartCoroutine(LevelGenerator.UpdateGraph(1));;
 

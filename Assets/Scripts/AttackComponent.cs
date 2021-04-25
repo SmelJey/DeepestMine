@@ -42,7 +42,7 @@ public class AttackComponent : MonoBehaviour {
         }
         
         IsAttacking = true;
-        component.GetHit(Weapon.AttackDamage);
+        component.GetHit(Weapon.AttackDamage, gameObject);
 
         yield return new WaitForSeconds(Weapon.AttackCooldown);
         IsAttacking = false;

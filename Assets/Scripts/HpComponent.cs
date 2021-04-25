@@ -13,8 +13,8 @@ public class HpComponent : MonoBehaviour, ISelectable {
     public int Hp => myHp;
     public bool DestroyOnDeath { get; set; } = true;
 
-    public void GetHit(int dmg) {
-        var args = new HitArgs(Math.Min(dmg, myHp));
+    public void GetHit(int dmg, GameObject attacker) {
+        var args = new HitArgs(Math.Min(dmg, myHp), attacker);
         myHp -= dmg;
         OnHit?.Invoke(this, args);
         isUpdated = true;
@@ -31,14 +31,14 @@ public class HpComponent : MonoBehaviour, ISelectable {
     public delegate void HitHandler(HpComponent component, HitArgs hitArgs);
 
     public class HitArgs {
-        public HitArgs(int dmg) {
+        public HitArgs(int dmg, GameObject attacker) {
             Damage = dmg;
+            Attacker = attacker;
         }
 
-        public int Damage {
-            get;
-            private set;
-        }
+        public GameObject Attacker { get; }
+        
+        public int Damage { get; }
     }
     
     public event HitHandler OnDeath;
