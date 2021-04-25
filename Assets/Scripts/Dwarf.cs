@@ -146,6 +146,10 @@ public class Dwarf : MonoBehaviour, ISelectable {
     public List<ActionInfo> GetActionList() {
         var actions = new List<ActionInfo>();
         foreach (var upgrade in upgrades) {
+            if (upgrade.Tool.NeedFactory && !SessionManager.Instance.CheckFactories()) {
+                continue;
+            }
+            
             actions.Add(new ActionInfo($"Cost: {upgrade.Cost.ResourceType} :: {upgrade.Cost.Cost}", () => {
                 if (myAttackComponent.Weapon.name != upgrade.Tool.name && SessionManager.Instance.Buy(new List<ResourceEntry> {upgrade.Cost})) {
                     myAttackComponent.Weapon = upgrade.Tool;

@@ -16,23 +16,9 @@ public class GameManager : MonoBehaviour {
 
     public void StartGame() {
         SceneManager.LoadScene("GameScene");
-        // var curScene = SceneManager.GetActiveScene();
-        // var loading = SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
-        // loading.allowSceneActivation = false;
-        // loading.completed += operation => {
-        //     var unloading = SceneManager.UnloadSceneAsync(curScene);
-        //     operation.allowSceneActivation = true;
-        // };
     }
 
     public void ToMenu() {
         SceneManager.LoadScene("MainMenu");
-        // var curScene = SceneManager.GetActiveScene();
-        // var loading = SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
-        // loading.allowSceneActivation = false;
-        // loading.completed += operation => {
-        //     var unloading = SceneManager.UnloadSceneAsync(curScene);
-        //     operation.allowSceneActivation = true;
-        // };
     }
 }

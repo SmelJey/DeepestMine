@@ -33,6 +33,10 @@ public class SelectedObject : MonoBehaviour {
         
         mySpriteRenderer.color = Color.white;
         SessionManager.Instance.Buy(AssociatedBuilding.Costs);
+        if (AssociatedBuilding.name == "Factory") {
+            SessionManager.Instance.AddFactory(gameObject);
+        }
+        
         Destroy(this);
         return true;
     }

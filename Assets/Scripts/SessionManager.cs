@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,12 +24,30 @@ public class SessionManager : MonoBehaviour {
 
     private Dictionary<Resource, int> myResourceCounts;
     private Dictionary<Resource, Text> myResourceLabels;
+    private HashSet<GameObject> myFactories;
     private LevelGenerator myLevelGenerator;
 
     public Dictionary<Resource, int> ResourceCount => myResourceCounts;
     public Vector2 HQPosition => playerHq == null ? Vector2.zero : (Vector2)playerHq.transform.position;
     private HqComponent playerHq;
 
+    public bool CheckFactories() {
+        foreach (var factory in myFactories.ToList()) {
+            if (factory == null) {
+                myFactories.Remove(factory);
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public void AddFactory(GameObject factory) {
+        myFactories.Add(factory);
+    }
+    
     public bool CheckCost(List<ResourceEntry> cost) {
         foreach (var entry in cost) {
             if (entry.Cost > myResourceCounts[entry.ResourceType]) {

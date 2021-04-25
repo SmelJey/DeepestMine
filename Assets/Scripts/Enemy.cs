@@ -59,7 +59,6 @@ public class Enemy : MonoBehaviour {
                 {
                     float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                    //moveDirection = Vector2.right;
                 }
             
                 if (hit.distance < myAttackComponent.Weapon.AttackRange) {
@@ -116,6 +115,13 @@ public class Enemy : MonoBehaviour {
         }
 
         Vector2 moveDir = myPath.vectorPath[myCurrentWaypoint] - transform.position; 
+        
+        var wallHit = Physics2D.Raycast(transform.position, moveDir.normalized, 2,
+                                      myAttackComponent.CollisionMask);
+        if (wallHit.collider != null) {
+            myAttackComponent.TryAttackTarget(wallHit.collider.gameObject);
+        }
+
         Move(moveDir.normalized);
     }
 

@@ -7,10 +7,12 @@ public class DwarfTool : ScriptableObject {
     [SerializeField] private float attackCooldown;
     [SerializeField] private bool canAttackRocks;
     [SerializeField] private Sprite toolSprite;
+    [SerializeField] private bool needFactory;
 
     public float AttackRange => attackRange;
     public int AttackDamage => attackDamage;
     public float AttackCooldown => attackCooldown;
     public bool CanAttackRocks => canAttackRocks;
     public Sprite ToolSprite => toolSprite;
+    public bool NeedFactory => needFactory;
 }

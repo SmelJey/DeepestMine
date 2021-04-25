@@ -14,9 +14,12 @@ public class EnemyManager : MonoBehaviour {
     }
 
     private int myDifficulty = 0;
-    [SerializeField] private int hordeDifficultyCoef = 90;
+    [SerializeField] private int hordeDifficultyCoef = 240;
     [SerializeField] private List<EnemyInfo> enemyTypes;
     private Random myRandom;
+
+    [SerializeField] private int myHordeCnt = 5;
+    private float myDifficultyMultiplier = 1;
     
     private void Start() {
         StartCoroutine(DifficultyLoop(.5f));
@@ -26,15 +29,42 @@ public class EnemyManager : MonoBehaviour {
     IEnumerator DifficultyLoop(float delay) {
         while (true) {
             yield return new WaitForSeconds(delay);
+
+            int rem = myDifficulty % hordeDifficultyCoef;
+            if (rem < hordeDifficultyCoef * 5 / 6) {
+                Spawn();
+            }
             
-            Spawn();
             myDifficulty++;
+            if (myDifficulty % hordeDifficultyCoef == 0) {
+                myDifficultyMultiplier *= 1f + myDifficulty * 1f / 3000;
+                SpawnHorde(myHordeCnt);
+                Debug.Log($"Horde: {myHordeCnt}");
+                myHordeCnt++;
+            }
         }
     }
 
+    public void SpawnHorde(int cnt) {
+        int x = myRandom.NextInt(10, LevelGenerator.MapWidth - 10) - LevelGenerator.MapWidth / 2;
+        int y = myRandom.NextInt((int) (LevelGenerator.MapChunkLength * 0.75f), LevelGenerator.MapChunkLength - 5);
+        
+        foreach (var enemy in enemyTypes) {
+            for (int i = 0; i < cnt; i++) {
+                if (enemy.minimalDifficulty <= myDifficulty && myRandom.NextFloat() < enemy.SpawningChance * myDifficultyMultiplier) {
+                    int dx = myRandom.NextInt(-5, 6);
+                    int dy = myRandom.NextInt(-2, 3);
+
+                    Instantiate(enemy.EnemyPrefab, new Vector3(x + dx, -y + dy, 0), Quaternion.identity, transform);
+                }
+            }
+            
+        }
+    }
+    
     public void Spawn() {
         foreach (var enemy in enemyTypes) {
-            if (myRandom.NextFloat() < enemy.SpawningChance) {
+            if (enemy.minimalDifficulty <= myDifficulty && myRandom.NextFloat() < enemy.SpawningChance * myDifficultyMultiplier) {
                 int x = myRandom.NextInt(1, LevelGenerator.MapWidth - 1) - LevelGenerator.MapWidth / 2;
                 int y = myRandom.NextInt((int) (LevelGenerator.MapChunkLength * 0.75f), LevelGenerator.MapChunkLength);
 

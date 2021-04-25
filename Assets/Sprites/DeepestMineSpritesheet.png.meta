@@ -92,6 +92,18 @@ TextureImporter:
   - first:
       213: -8707875715616804164
     second: DwarfSprite
+  - first:
+      213: 6336411383971873432
+    second: Barricade
+  - first:
+      213: -2850565102576226597
+    second: BuglingSprite
+  - first:
+      213: 2052702687612330307
+    second: SpitterSprite
+  - first:
+      213: 2212390377922700394
+    second: GruntSprite
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -858,7 +870,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -866,6 +878,90 @@ TextureImporter:
       bones: []
       spriteID: cb2f8664c29672780800000000000000
       internalID: -8707875715616804164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barricade
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 892826cf4947fe750800000000000000
+      internalID: 6336411383971873432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BuglingSprite
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdea1d36422c078d0800000000000000
+      internalID: -2850565102576226597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpitterSprite
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 16
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3416f9cf73aac7c10800000000000000
+      internalID: 2052702687612330307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GruntSprite
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 15
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a642394b35df3be10800000000000000
+      internalID: 2212390377922700394
       vertices: []
       indices: 
       edges: []
