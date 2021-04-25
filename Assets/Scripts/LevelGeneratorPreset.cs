@@ -10,11 +10,12 @@ public class LevelGeneratorPreset : ScriptableObject {
     [SerializeField] private HqComponent hqPrefab;
     [SerializeField] private GameObject dwarfPrefab;
     [SerializeField] private GameObject[] wallPrefab;
-    [SerializeField] private GameObject[] orePrefab;
-    
+
     [SerializeField] private int maxExitPerChunk = 4;
     [SerializeField] private int maxExitWidth = 5;
     [SerializeField] private int borderSize = 4;
+    
+    [SerializeField] private Resource[] resources;
 
     public float InitialWallChance => initialWallChance;
     public int WallCntToWall => wallCntToWall;
@@ -25,7 +26,7 @@ public class LevelGeneratorPreset : ScriptableObject {
     public HqComponent HqPrefab => hqPrefab;
     public GameObject DwarfPrefab => dwarfPrefab;
     public GameObject[] WallPrefab => wallPrefab;
-    public GameObject[] OrePrefab => orePrefab;
+    public Resource[] Resources => resources;
 
     public int MaxExitPerChunk => maxExitPerChunk;
     public int MaxExitWidth=> maxExitWidth;

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class HpComponent : MonoBehaviour {
+public class HpComponent : MonoBehaviour, ISelectable {
     [SerializeField] private int myMaxHp;
     [SerializeField] private int myHp;
 
@@ -9,8 +10,8 @@ public class HpComponent : MonoBehaviour {
     public bool DestroyOnDeath { get; set; } = true;
 
     public void GetHit(int dmg) {
+        var args = new HitArgs(Math.Min(dmg, myHp));
         myHp -= dmg;
-        var args = new HitArgs(dmg);
         OnHit?.Invoke(this, args);
         
         if (myHp <= 0) {
@@ -37,4 +38,12 @@ public class HpComponent : MonoBehaviour {
     
     public event HitHandler OnDeath;
     public event HitHandler OnHit;
+
+    public string Name => gameObject.name;
+
+    public string GetInfo() {
+        return $"HP: {myHp} / {myMaxHp}";
+    }
+
+    public void OnRightClick() { }
 }
