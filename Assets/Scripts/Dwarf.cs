@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Pathfinding;
 using UnityEngine;
 
 public class Dwarf : MonoBehaviour, ISelectable {
-    [SerializeField] private int movementSpeed = 5;
+    [SerializeField] private int movementSpeed = 7;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private DwarfTool currentTool;
+    [SerializeField] private SpriteRenderer weaponRenderer;
 
     [SerializeField] private List<DwarfToolCost> upgrades;
 
@@ -17,24 +16,29 @@ public class Dwarf : MonoBehaviour, ISelectable {
         public DwarfTool Tool;
         public ResourceEntry Cost;
     }
-    
+
+    private AttackComponent myAttackComponent;
     private Path myPath;
     private GameObject myTarget;
     private int myCurrentWaypoint = 0;
     private float nextWaypointDistance = 0.25f;
     private Seeker mySeeker;
-    private bool isAttacking = false;
     private bool isUpdated = true;
+    private Rigidbody2D myRigidbody2D;
     
     private void Awake() {
         mySeeker = GetComponent<Seeker>();
+        myAttackComponent = GetComponent<AttackComponent>();
+        myRigidbody2D = GetComponent<Rigidbody2D>();
+        
+        weaponRenderer.sprite = myAttackComponent.Weapon.ToolSprite;
     }
 
     public string Name => gameObject.name;
 
     public string GetInfo() {
         isUpdated = false;
-        return $"Tool: {currentTool.name}";
+        return $"Tool: {myAttackComponent.Weapon.name}";
     }
 
     public void OnRightClick(Vector2 mousePosition) {
@@ -45,9 +49,11 @@ public class Dwarf : MonoBehaviour, ISelectable {
             myTarget = hit.collider.gameObject;
         }
 
+        mySeeker.CancelCurrentPathRequest();
         mySeeker.StartPath(transform.position, mousePosition, path => {
-            if (!path.error) {
+            if (path.error) {
                 Debug.Log(path.errorLog, this);
+                return;
             }
 
             myPath = path;
@@ -55,32 +61,13 @@ public class Dwarf : MonoBehaviour, ISelectable {
         });
     }
 
-    private void TryAttackTarget() {
-        Debug.DrawRay(transform.position, (myTarget.transform.position - transform.position).normalized, Color.red);
-        var hit = Physics2D.Raycast(transform.position,
-                                    (myTarget.transform.position - transform.position).normalized, currentTool.AttackRange, layerMask);
-
-        if (hit.collider != null && hit.collider.gameObject == myTarget) {
-            var obj = hit.collider.gameObject;
-            var hitComp = obj.GetComponent<HpComponent>();
-            if (hitComp != null) {
-                if (obj.CompareTag("Wall") && !currentTool.CanAttackRocks) {
-                    return;
-                }
-
-                if (Vector3.Distance(transform.position, obj.transform.position) < currentTool.AttackRange) {
-                    StartCoroutine(Attack(hitComp));
-                }
-            }
-        }
-    }
-    
     private void Update() {
         if (myTarget != null) {
-            TryAttackTarget();
+            myAttackComponent.TryAttackTarget(myTarget);
         }
         
-        if (myPath == null || isAttacking) {
+        if (myPath == null || myAttackComponent.IsAttacking) {
+            myRigidbody2D.velocity = Vector2.zero;
             return;
         }
         
@@ -100,26 +87,34 @@ public class Dwarf : MonoBehaviour, ISelectable {
         }
 
         if (myPath != null) {
-            transform.Translate((myPath.vectorPath[myCurrentWaypoint] - transform.position).normalized * movementSpeed
-                                * Time.deltaTime * (Vector2.Distance(transform.position, myPath.vectorPath.Last()) < 0.5 ? 0.25f : 1));
+            Vector2 moveDirection = myPath.vectorPath[myCurrentWaypoint] - transform.position; 
+            Move(moveDirection.normalized);
         }
-
     }
-
-    IEnumerator Attack(HpComponent component) {
-        if (isAttacking) {
-            yield break;
+    
+    private void Move(Vector2 direction) {
+        if (direction != Vector2.zero) 
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-
-        isAttacking = true;
-        component.GetHit(currentTool.AttackDamage);
-
-        yield return new WaitForSeconds(currentTool.AttackCooldown);
-        isAttacking = false;
+        
+        myRigidbody2D.velocity = direction * movementSpeed;
     }
 
     public List<ActionInfo> GetActionList() {
-        return new List<ActionInfo>();
+        var actions = new List<ActionInfo>();
+        foreach (var upgrade in upgrades) {
+            actions.Add(new ActionInfo($"Cost: {upgrade.Cost.ResourceType} :: {upgrade.Cost.Cost}", () => {
+                if (myAttackComponent.Weapon.name != upgrade.Tool.name && SessionManager.Instance.Buy(new List<ResourceEntry> {upgrade.Cost})) {
+                    myAttackComponent.Weapon = upgrade.Tool;
+                    weaponRenderer.sprite = myAttackComponent.Weapon.ToolSprite;
+                    isUpdated = true;
+                }
+            }));
+        }
+
+        return actions;
     }
 
     public bool IsUpdated() => isUpdated;

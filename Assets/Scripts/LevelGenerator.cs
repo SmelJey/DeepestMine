@@ -24,8 +24,8 @@ public class LevelGenerator {
 
     private const int StartRadius = 3;
     
-    private const int MapWidth = 100;
-    private const int MapChunkLength = 100;
+    public const int MapWidth = 100;
+    public const int MapChunkLength = 100;
     private const int ChunkPreGeneration = 1;
 
     private List<TileType[]> levelMap;

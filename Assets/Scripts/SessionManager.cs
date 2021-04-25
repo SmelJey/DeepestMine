@@ -24,6 +24,8 @@ public class SessionManager : MonoBehaviour {
     private LevelGenerator myLevelGenerator;
 
     public Dictionary<Resource, int> ResourceCount => myResourceCounts;
+    public Vector2 HQPosition => playerHq == null ? Vector2.zero : (Vector2)playerHq.transform.position;
+    private HqComponent playerHq;
 
     public bool CheckCost(List<ResourceEntry> cost) {
         foreach (var entry in cost) {
@@ -52,6 +54,8 @@ public class SessionManager : MonoBehaviour {
         foreach (var entry in res) {
             myResourceCounts[entry.ResourceType] += entry.Cost;
         }
+        
+        OnResourceChange();
     }
     
     private void Awake() {
@@ -78,8 +82,8 @@ public class SessionManager : MonoBehaviour {
         
         OnResourceChange();
 
-        var hq = myLevelGenerator.InitLevel(levelHost);
-        hq.GetComponent<HpComponent>().OnDeath += (hpComponent, args) => {
+        playerHq = myLevelGenerator.InitLevel(levelHost);
+        playerHq.GetComponent<HpComponent>().OnDeath += (hpComponent, args) => {
             Lose();
         };
 
@@ -102,7 +106,9 @@ public class SessionManager : MonoBehaviour {
                 playerControl.SelectBuilding(building);
             });
         }
-        
+    }
+
+    private void Start() {
         AstarPath.active.Scan();
     }
 

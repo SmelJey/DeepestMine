@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerControl : MonoBehaviour {
     [SerializeField] private float cameraMovementSpeed = 1;
     [SerializeField] private InfoPanel infoPanel;
+    [SerializeField] private LayerMask selectableLayerMask;
 
     public SelectedObject SelectedBuilding { get; set; }
     public List<ISelectable> selectedComponents;
@@ -83,7 +84,7 @@ public class PlayerControl : MonoBehaviour {
             return;
         
         if (Input.GetMouseButtonDown(0)) {
-            var hit = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero, 0f);
+            var hit = Physics2D.Raycast(new Vector2(mousePos.x, mousePos.y), Vector2.zero, 0f, selectableLayerMask);
 
             if (hit.collider != null) {
                 SelectObject(hit.collider.gameObject);

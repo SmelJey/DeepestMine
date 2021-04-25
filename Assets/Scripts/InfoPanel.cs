@@ -39,7 +39,7 @@ public class InfoPanel : MonoBehaviour {
                 var btn = Instantiate(buttonPrefab, actionListPanel);
                 var curRect = btn.GetComponent<RectTransform>();
                 curRect.anchoredPosition = new Vector2(0, curY);
-                curY += btnTransform.rect.height;
+                curY -= btnTransform.rect.height;
 
                 btn.GetComponentInChildren<Text>().text = action.Description;
                 btn.onClick.AddListener(action.Callback);
