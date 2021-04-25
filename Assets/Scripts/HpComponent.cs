@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HpComponent : MonoBehaviour, ISelectable {
@@ -46,4 +47,7 @@ public class HpComponent : MonoBehaviour, ISelectable {
     }
 
     public void OnRightClick() { }
+    public List<ActionInfo> GetActionList() {
+        return new List<ActionInfo>();
+    }
 }

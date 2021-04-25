@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabcc0801d9d4921a135a830fa0efbcb, type: 3}
   m_Name: Turret
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  costs: []
+  prefab: {fileID: 2342167608724445734, guid: 86820f6b0bfe1114fa97d75344727ffa, type: 3}
+  costs:
+  - resource: {fileID: 11400000, guid: 44f4cc873ca739d4395a8b3102f19b9a, type: 2}
+    cost: 50
+  - resource: {fileID: 11400000, guid: afaacb1c536056b41bb44834e5c70846, type: 2}
+    cost: 25

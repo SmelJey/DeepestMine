@@ -20,7 +20,9 @@ MonoBehaviour:
   dwarfPrefab: {fileID: 0}
   wallPrefab:
   - {fileID: 8506925870839009024, guid: 71fdd349a7f601c4bb786f79e59c36db, type: 3}
-  orePrefab: []
   maxExitPerChunk: 4
   maxExitWidth: 5
   borderSize: 4
+  resources:
+  - {fileID: 11400000, guid: 44f4cc873ca739d4395a8b3102f19b9a, type: 2}
+  - {fileID: 11400000, guid: afaacb1c536056b41bb44834e5c70846, type: 2}

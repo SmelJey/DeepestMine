@@ -33,7 +33,7 @@ public class SessionManager : MonoBehaviour {
 
         return true;
     }
-    
+
     public bool Buy(List<ResourceEntry> cost) {
         if (!CheckCost(cost)) {
             return false;

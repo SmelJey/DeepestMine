@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabcc0801d9d4921a135a830fa0efbcb, type: 3}
   m_Name: PowerPlant
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  costs: []
+  prefab: {fileID: 6022401802753991280, guid: acc7bafc676aa294c9acf9aa3e414a06, type: 3}
+  costs:
+  - resource: {fileID: 11400000, guid: afaacb1c536056b41bb44834e5c70846, type: 2}
+    cost: 25

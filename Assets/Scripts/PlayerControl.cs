@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour {
         
         selectedObject.Clear();
         selectedObject.AddRange(obj.GetComponents<ISelectable>());
+        infoPanel.ShowSelectedObjectsInfo(selectedObject);
     }
     
     private void Awake() {
@@ -40,8 +41,6 @@ public class PlayerControl : MonoBehaviour {
     }
 
     private void Update() {
-        infoPanel.ShowSelectedObjectsInfo(selectedObject);
-
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         transform.Translate(new Vector3(x, y) * cameraMovementSpeed * Time.deltaTime);
