@@ -16,6 +16,9 @@ public class PlayerControl : MonoBehaviour {
     private Camera myCamera;
 
     public void SelectBuilding(Building building) {
+        if (selectedComponents.Count != 0) {
+            selectedGameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
         selectedComponents.Clear();
         selectedGameObject = null;
         
@@ -33,10 +36,15 @@ public class PlayerControl : MonoBehaviour {
         if (SelectedBuilding != null) {
             return;
         }
+
+        if (selectedComponents.Count != 0) {
+            selectedGameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
         
         selectedComponents.Clear();
         selectedComponents.AddRange(obj.GetComponents<ISelectable>());
         selectedGameObject = obj;
+        selectedGameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
         infoPanel.ShowSelectedObjectsInfo(selectedComponents);
     }
     

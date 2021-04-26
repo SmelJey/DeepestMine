@@ -56,7 +56,8 @@ public class EnemyManager : MonoBehaviour {
                     int dx = myRandom.NextInt(-5, 6);
                     int dy = myRandom.NextInt(-2, 3);
 
-                    Instantiate(enemy.EnemyPrefab, new Vector3(x + dx, -y + dy, 0), Quaternion.identity, transform);
+                    var enemyObj = Instantiate(enemy.EnemyPrefab, new Vector3(x + dx, -y + dy, 0), Quaternion.identity, transform);
+                    enemyObj.name = enemy.EnemyPrefab.name;
                 }
             }
             
@@ -69,7 +70,8 @@ public class EnemyManager : MonoBehaviour {
                 int x = myRandom.NextInt(1, LevelGenerator.MapWidth - 1) - LevelGenerator.MapWidth / 2;
                 int y = myRandom.NextInt((int) (LevelGenerator.MapChunkLength * 0.75f), LevelGenerator.MapChunkLength);
 
-                Instantiate(enemy.EnemyPrefab, new Vector3(x, -y, 0), Quaternion.identity, transform);
+                var enemyObj = Instantiate(enemy.EnemyPrefab, new Vector3(x, -y, 0), Quaternion.identity, transform);
+                enemyObj.name = enemy.EnemyPrefab.name;
             }
         }
     }

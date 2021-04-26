@@ -41,6 +41,7 @@ public class SelectedObject : MonoBehaviour {
         }
 
         gameObject.layer = cachedLayer;
+        gameObject.name = AssociatedBuilding.name;
         
         Destroy(this);
         return true;

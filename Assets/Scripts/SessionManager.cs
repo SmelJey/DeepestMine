@@ -110,6 +110,7 @@ public class SessionManager : MonoBehaviour {
         OnResourceChange();
 
         playerHq = myLevelGenerator.InitLevel(levelHost);
+        playerHq.name = "Dwarven Castle";
         playerHq.GetComponent<HpComponent>().OnDeath += (hpComponent, args) => {
             Lose();
         };

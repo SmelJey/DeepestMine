@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class HqComponent : MonoBehaviour, ISelectable {
     public string Name => gameObject.name;
+    private int myDwarfCnt = 0;
 
     public string GetInfo() {
         isUpdated = false;
@@ -40,7 +41,8 @@ public class HqComponent : MonoBehaviour, ISelectable {
                             .ToList();
             isUpdated = true;
 
-            Instantiate(dwarfPrefab, transform.position + new Vector3(0, -2, 0), Quaternion.identity);
+            var obj = Instantiate(dwarfPrefab, transform.position + new Vector3(0, -2, 0), Quaternion.identity);
+            obj.name = $"Dwarf #{myDwarfCnt++}";
         })};
     }
 

@@ -132,7 +132,8 @@ public class LevelGenerator {
                     bool isWall = true;
                     foreach (var res in myPreset.Resources) {
                         if (res.MinYSpawn <= i && myOreRandom.NextFloat() < res.GetSpawnChance(i)) {
-                            res.InstantiateOre(IdxToWorldPos(i, j), levelHost.transform);
+                            var ore = res.InstantiateOre(IdxToWorldPos(i, j), levelHost.transform);
+                            ore.name = $"{res.name} ore";
                             isWall = false;
                             break;
                         }
@@ -140,6 +141,7 @@ public class LevelGenerator {
 
                     if (isWall) {
                         var obj = Object.Instantiate(myPreset.WallPrefab[0], IdxToWorldPos(i, j), Quaternion.identity, levelHost.transform);
+                        obj.name = "Cave wall";
                         obj.GetComponent<HpComponent>().OnDeath += (component, args) => {
                             SessionManager.Instance.StartCoroutine(UpdateGraph(1));
                         };
