@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour {
-    private Text lastScoreLabel;
-    
-    private void Awake() {
-        lastScoreLabel = GetComponent<Text>();
+    [SerializeField] private Text lastScoreLabel;
+
+    public void StartBtn() {
+        GameManager.Instance.StartGame();
     }
 
     private void Start() {

@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 134934960}
   - component: {fileID: 134934962}
   - component: {fileID: 134934961}
-  - component: {fileID: 134934963}
   m_Layer: 5
   m_Name: LastScore
   m_TagString: Untagged
@@ -203,18 +202,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134934959}
   m_CullTransparentMesh: 1
---- !u!114 &134934963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 134934959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a37d709604e7394697ac8d48c06bdb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &152980233
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,17 +463,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &591367322 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3755914977967153667, guid: cae58446be19ff042842c87fd04f6599, type: 3}
-  m_PrefabInstance: {fileID: 3755914978556817049}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beedf1c5989935049ab966f8c01a3e5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &621714065
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +475,7 @@ GameObject:
   - component: {fileID: 621714068}
   - component: {fileID: 621714067}
   - component: {fileID: 621714066}
+  - component: {fileID: 621714070}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -589,6 +566,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &621714070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621714065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a37d709604e7394697ac8d48c06bdb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastScoreLabel: {fileID: 134934961}
 --- !u!1 &1415192570
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,9 +741,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 591367322}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartGame
+      - m_Target: {fileID: 621714070}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: StartBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
